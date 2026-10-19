@@ -1,6 +1,7 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import helmet from 'helmet';
+import { loadConfig } from './config/index.js';
 import { createContainer } from './container.js';
 import { attachUser } from './middleware/session.middleware.js';
 import { errorHandler } from './middleware/error-handler.middleware.js';
@@ -60,4 +61,16 @@ export async function createApp({ config, overrides = {} }) {
 
   app.use(errorHandler(config.isProd));
   return { app, container };
+}
+
+/**
+ * Vercel entrypoint: build the app once per warm instance, then reuse it.
+ * server.js (local / long-running servers) keeps using createApp + listen.
+ */
+let appPromise;
+
+export default async function handler(req, res) {
+  appPromise ??= createApp({ config: loadConfig() }).then((r) => r.app);
+  const app = await appPromise;
+  return app(req, res);
 }
