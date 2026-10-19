@@ -1,0 +1,2 @@
+laptop-scene.js is a bundle built from assets-src/laptop-scene/main.js with esbuild (npm run build:scene).
+It includes three.js (MIT licence, see three-LICENSE.txt): https://threejs.org

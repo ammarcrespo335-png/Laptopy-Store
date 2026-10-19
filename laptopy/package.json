@@ -1,0 +1,39 @@
+{
+  "name": "laptopy-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Laptopy \u2013 laptop store website with Google sign-in, admin panel and AI advisor (Robin).",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test --test-reporter=spec \"test/**/*.test.js\"",
+    "build:scene": "esbuild assets-src/laptop-scene/main.js --bundle --minify --format=esm --target=es2022 --outfile=public/vendor/laptop-scene.js --legal-comments=none",
+    "build:seed": "node scripts/build-seed.mjs docs/laptopy_price_list.xlsx"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^18.0.7",
+    "exceljs": "^4.4.0",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "google-auth-library": "^11.2.0",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.6.5"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "simple-icons": "^16.35.0",
+    "three": "^0.186.1"
+  }
+}

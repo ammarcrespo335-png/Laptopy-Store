@@ -1,0 +1,83 @@
+/* ---------- Design tokens: navy + white, taken from the Laptopy logo ---------- */
+:root {
+  --bg: #08101f;
+  --surface: #0f1d3a;
+  --glass: #ffffff0d;
+  --glass-2: #ffffff14;
+  --line: #ffffff1f;
+  --tx: #eaf0ff;
+  --mu: #9fb0d6;
+  --ac: #4f8cff;
+  --ac-2: #8fb4ff;
+  --ac-d: #3b6fe8;
+  --navy: #14264d;
+  --ok: #10b981;
+  --danger: #ef4444;
+  --wa: #25d366;
+  --radius: 18px;
+  --maxw: 1160px;
+  --gutter: max(20px, calc(50% - 580px));
+  --font: 'Sora', 'Cairo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: #060c1a; scroll-padding-top: 90px; }
+body {
+  margin: 0;
+  color: var(--tx);
+  font: 14.5px/1.55 var(--font);
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top, 0px);
+  overflow-x: hidden;
+}
+h1, h2, h3, h4, p { margin: 0; }
+h1, h2, h3, h4 { letter-spacing: -0.02em; }
+a { color: var(--ac-2); }
+img, svg { max-width: 100%; }
+[hidden] { display: none !important; }
+
+:focus-visible { outline: 2px solid var(--ac-2); outline-offset: 2px; border-radius: 6px; }
+
+.mu { color: var(--mu); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+/* ---------- Background: one blurred logo, soft glows and a cursor spotlight ---------- */
+.bgfx {
+  position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+  background:
+    radial-gradient(1100px 650px at 75% -10%, #1d3f86 0%, transparent 60%),
+    radial-gradient(800px 600px at 0% 100%, #10285a 0%, transparent 55%),
+    linear-gradient(180deg, #0a1630, #060c1a);
+}
+.bgfx i {
+  position: absolute; inset: -6%;
+  background: url('/assets/logo-bg.png') center 38% / min(760px, 80vw) no-repeat;
+  opacity: 0.1; filter: blur(7px);
+}
+.bgfx b {
+  position: absolute; width: 520px; height: 520px; border-radius: 50%;
+  filter: blur(100px); background: #2f63e0; opacity: 0.26; top: -140px; right: -120px;
+}
+.bgfx b.b2 { background: #1b3f9a; top: auto; right: auto; bottom: -160px; left: -120px; }
+.glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(520px circle at var(--mx, 60%) var(--my, 25%), #4f8cff22, transparent 60%);
+}
+
+/* ---------- Form controls ---------- */
+button, input, select, textarea { font: inherit; color: var(--tx); }
+button {
+  border: 1px solid var(--line); background: var(--glass); padding: 8px 14px; border-radius: 10px; cursor: pointer;
+}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+input, select, textarea {
+  width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px;
+}
+input::placeholder, textarea::placeholder { color: #7f92bd; }
+select option { background: var(--surface); color: #fff; }
+input[type='checkbox'] { width: auto; accent-color: var(--ac); }
+
+/* inline SVG inside text-like controls follows the text colour */
+.btn svg, button svg, .linkbtn svg { flex: none; }
